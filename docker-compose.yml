@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    volumes:
+      - ./src:/var/www/html
+      - ./php.ini:/usr/local/etc/php/php.ini
+    ports:
+      - "8000:80"
+    depends_on:
+      - mysql_db
+    networks:
+      - app-network
+
+  mysql_db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: parkiranbanjir
+      MYSQL_DATABASE: furniture
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - app-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    environment:
+      PMA_HOST: mysql_db
+      PMA_ARBITRARY: 0
+      MYSQL_ROOT_PASSWORD: parkiranbanjir
+    ports:
+      - "8081:80"
+    depends_on:
+      - mysql_db
+    networks:
+      - app-network
+
+volumes:
+  mysql_data:
+
+networks:
+  app-network:
+    driver: bridge
