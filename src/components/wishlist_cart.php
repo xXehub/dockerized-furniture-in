@@ -1,12 +1,9 @@
 <?php
-// Contoh pengambilan data dari database atau array
-$wishlist_items = [];  // Ini harus array
+$wishlist_items = [];  
 
-// Kalau ambil data dari database, pastikan fetchAll() digunakan agar hasilnya array
 $query = $conn->prepare("SELECT * FROM wishlist WHERE user_id = ?");
 $query->execute([$user_id]);
 $wishlist_items = $query->fetchAll(PDO::FETCH_ASSOC);
-
 
 if (isset($_POST['add_to_wishlist'])) {
 
@@ -14,7 +11,6 @@ if (isset($_POST['add_to_wishlist'])) {
       header('location:user_login.php');
    } else {
 
-      // Sanitize input using htmlspecialchars instead of FILTER_SANITIZE_STRING
       $pid = $_POST['pid'];
       $pid = htmlspecialchars($pid, ENT_QUOTES, 'UTF-8');
 
@@ -30,7 +26,7 @@ if (isset($_POST['add_to_wishlist'])) {
       $qty = $_POST['qty'];
       $qty = filter_var($qty, FILTER_SANITIZE_NUMBER_INT);
 
-
+      // Cek apakah barang sudah ada di wishlist
       $check_wishlist_numbers = $conn->prepare("SELECT * FROM `wishlist` WHERE name = ? AND user_id = ?");
       $check_wishlist_numbers->execute([$name, $user_id]);
 
@@ -38,13 +34,16 @@ if (isset($_POST['add_to_wishlist'])) {
       $check_cart_numbers->execute([$name, $user_id]);
 
       if ($check_wishlist_numbers->rowCount() > 0) {
-         $message[] = 'already added to wishlist!';
+         $message[] = 'sudah ada di wishlist!';
+         $message_icon = 'error'; 
       } elseif ($check_cart_numbers->rowCount() > 0) {
-         $message[] = 'already added to cart!';
+         $message[] = 'sudah ada di keranjang!';
+         $message_icon = 'error'; 
       } else {
          $insert_wishlist = $conn->prepare("INSERT INTO `wishlist`(user_id, pid, name, price, image) VALUES(?,?,?,?,?)");
          $insert_wishlist->execute([$user_id, $pid, $name, $price, $image]);
-         $message[] = 'added to wishlist!';
+         $message[] = 'ditambahkan ke wishlist!';
+         $message_icon = 'success';  
       }
 
    }
@@ -57,7 +56,6 @@ if (isset($_POST['add_to_cart'])) {
       header('location:user_login.php');
    } else {
 
-      // Sanitize input using htmlspecialchars instead of FILTER_SANITIZE_STRING
       $pid = $_POST['pid'];
       $pid = htmlspecialchars($pid, ENT_QUOTES, 'UTF-8');
 
@@ -70,16 +68,15 @@ if (isset($_POST['add_to_cart'])) {
       $image = $_POST['image'];
       $image = htmlspecialchars($image, ENT_QUOTES, 'UTF-8');
 
-      // For quantity, if it's expected to be a numeric value, use a filter for integers
       $qty = $_POST['qty'];
       $qty = filter_var($qty, FILTER_SANITIZE_NUMBER_INT);
-
 
       $check_cart_numbers = $conn->prepare("SELECT * FROM `cart` WHERE name = ? AND user_id = ?");
       $check_cart_numbers->execute([$name, $user_id]);
 
       if ($check_cart_numbers->rowCount() > 0) {
-         $message['sudah_keranjang'] = 'already added to cart!';
+         $message['sudah_keranjang'] = 'sudah ada di keranjang!';
+         $message_icon = 'error';  
       } else {
 
          $check_wishlist_numbers = $conn->prepare("SELECT * FROM `wishlist` WHERE name = ? AND user_id = ?");
@@ -92,12 +89,38 @@ if (isset($_POST['add_to_cart'])) {
 
          $insert_cart = $conn->prepare("INSERT INTO `cart`(user_id, pid, name, price, quantity, image) VALUES(?,?,?,?,?,?)");
          $insert_cart->execute([$user_id, $pid, $name, $price, $qty, $image]);
-         $message[] = 'added to cart!';
-
+         $message[] = 'ditambahkan keranjang!';
+         $message_icon = 'success'; 
       }
 
    }
 
 }
-
 ?>
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist and Cart</title>
+    <!-- SweetAlert2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.9/dist/sweetalert2.min.css" rel="stylesheet">
+</head>
+<body>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.9/dist/sweetalert2.min.js"></script>
+
+<script type="text/javascript">
+   <?php if (isset($message)) { ?>
+       Swal.fire({
+           icon: '<?= isset($message_icon) ? $message_icon : 'success'; ?>',
+           title: '<?= implode(', ', $message); ?>',
+           showConfirmButton: false,
+           timer: 1500
+       });
+   <?php } ?>
+</script>
+
+</body>
+</html>

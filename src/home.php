@@ -15,6 +15,7 @@ include 'components/wishlist_cart.php';
 ?>
 
 
+
 <!-- Konten halaman home.php lainnya -->
 
 <!DOCTYPE html>
@@ -447,7 +448,9 @@ include 'components/wishlist_cart.php';
                 confirmButtonText: 'OK'
             });
         </script>
+        
     <?php endif; ?>
+    
 </body>
 
 </html>
