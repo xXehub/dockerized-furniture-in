@@ -1,6 +1,6 @@
 <?php
 
-include 'components/connect.php';
+include 'components/connect';
 
 session_start();
 
@@ -33,7 +33,7 @@ if(isset($_SESSION['user_id'])){
 </head>
 <body>
    
-<?php include 'components/user_header.php'; ?>
+<?php include 'components/user_header'; ?>
 
 <section class="orders">
 
@@ -85,7 +85,7 @@ if(isset($_SESSION['user_id'])){
 
 
 
-<?php include 'components/footer.php'; ?>
+<?php include 'components/footer'; ?>
 
 <script src="js/script.js"></script>
 

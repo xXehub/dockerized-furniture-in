@@ -12,7 +12,7 @@ if (isset($message)) {
 // perintah untuk logout
 if (isset($_POST["logout"])) {
    session_destroy();
-   header("Location: home.php");
+   header("Location: home");
    exit();
 }
 ?>
@@ -111,7 +111,7 @@ if (isset($_POST["logout"])) {
                      </b> Selamat Datang
                   </p>
                   <div id="user-btn">
-                     <!-- <a href="components/user_logout.php" class="logout-button">Logout</a> -->
+                     <!-- <a href="components/user_logout" class="logout-button">Logout</a> -->
                   </div>
                <?php
                } else {
@@ -121,8 +121,8 @@ if (isset($_POST["logout"])) {
                         <b></b>
                         Selamat Datang, Silahkan Masuk Terlebih Dahulu
                      </p>
-                     <!-- <a href="user_register.php" class="btn btn-login">register</a> -->
-                     <!-- <a href="user_login.php" class="user-btn">login</a> -->
+                     <!-- <a href="user_register" class="btn btn-login">register</a> -->
+                     <!-- <a href="user_login" class="user-btn">login</a> -->
                   </div>
                <?php
                }
@@ -216,14 +216,14 @@ if (isset($_POST["logout"])) {
 
                   <div id="user-btn">
                      <button class="action-btn">
-                        <a href="components/user_logout.php" onclick="return confirm('Apakah Anda Yakin Ingin Keluar?');"><ion-icon name="log-out-outline"></ion-icon></a>
+                        <a href="components/user_logout" onclick="return confirm('Apakah Anda Yakin Ingin Keluar?');"><ion-icon name="log-out-outline"></ion-icon></a>
                         <span class="count">
                            <?= $fetch_profile["name"]; ?>
                         </span>
                         <!-- <span class="count">0</span> -->
                      </button>
-                     <!-- <a href="components/user_logout.php" class="logout-button">Logout</a> -->
-                     <!-- <a href="user_login.php"><ion-icon name="log-out-outline"></ion-icon></a> -->
+                     <!-- <a href="components/user_logout" class="logout-button">Logout</a> -->
+                     <!-- <a href="user_login"><ion-icon name="log-out-outline"></ion-icon></a> -->
                   </div>
 
                <?php
@@ -231,23 +231,23 @@ if (isset($_POST["logout"])) {
                } else {
                ?>
                   <div id="user-btn">
-                     <!-- <a href="user_register.php" class="btn btn-login">register</a> -->
+                     <!-- <a href="user_register" class="btn btn-login">register</a> -->
                      <!-- <div id="user-btn"> -->
                      <button class="action-btn">
-                        <a href="user_login.php"><ion-icon name="log-in-outline"></ion-icon></a>
+                        <a href="user_login"><ion-icon name="log-in-outline"></ion-icon></a>
                         <span class="count">
                            login
                         </span>
                         <!-- <span class="count">0</span> -->
                      </button>
-                     <!-- <a href="user_login.php"><ion-icon name="log-in-outline"></ion-icon></a> -->
-                     <!-- <a href="user_login.php" class="user-btn">login</a> -->
+                     <!-- <a href="user_login"><ion-icon name="log-in-outline"></ion-icon></a> -->
+                     <!-- <a href="user_login" class="user-btn">login</a> -->
                   </div>
                <?php
                }
                ?>
                <button class="action-btn">
-                  <a href="wishlist.php"><ion-icon name="heart-outline"></ion-icon></a>
+                  <a href="wishlist"><ion-icon name="heart-outline"></ion-icon></a>
                   <span class="count">
                      <?= $total_wishlist_counts; ?>
                   </span>
@@ -255,7 +255,7 @@ if (isset($_POST["logout"])) {
                </button>
                <button class="action-btn">
 
-                  <a href="cart.php"><ion-icon name="bag-handle-outline"></ion-icon></a>
+                  <a href="cart"><ion-icon name="bag-handle-outline"></ion-icon></a>
                   <span class="count">
                      <?= $total_cart_counts; ?>
                   </span>
@@ -273,20 +273,20 @@ if (isset($_POST["logout"])) {
                      <p>
                         <?= $fetch_profile["name"]; ?>
                      </p>
-                     <a href="update_user.php" class="btn">update profile</a>
+                     <a href="update_user" class="btn">update profile</a>
                      <div class="flex-btn">
-                        <a href="user_register.php" class="option-btn">register</a>
-                        <a href="user_login.php" class="option-btn">login</a>
+                        <a href="user_register" class="option-btn">register</a>
+                        <a href="user_login" class="option-btn">login</a>
                      </div>
-                     <a href="components/user_logout.php" class="delete-btn" onclick="return confirm('logout from the website?');">logout</a>
+                     <a href="components/user_logout" class="delete-btn" onclick="return confirm('logout from the website?');">logout</a>
 
                   <?php
                   } else {
                   ?>
                      <p>please login or register first!</p>
                      <div class="flex-btn">
-                        <a href="user_register.php" class="option-btn">register</a>
-                        <a href="user_login.php" class="option-btn">login</a>
+                        <a href="user_register" class="option-btn">register</a>
+                        <a href="user_login" class="option-btn">login</a>
                      </div>
                   <?php
                   }
@@ -308,7 +308,7 @@ if (isset($_POST["logout"])) {
                <li class="menu-category">
 
 
-                  <a href="home.php" class="menu-title">Home</a>
+                  <a href="home" class="menu-title">Home</a>
                </li>
                <!-- kategorine wir jawir -->
                <!-- <li class="menu-category">
@@ -456,7 +456,7 @@ if (isset($_POST["logout"])) {
 
 
                <li class="menu-category">
-                  <a href="orders.php" class="menu-title">Pesanan</a>
+                  <a href="orders" class="menu-title">Pesanan</a>
                </li>
 
             </ul>

@@ -1,6 +1,6 @@
 <?php
 
-include 'components/connect.php';
+include 'components/connect';
 
 session_start();
 
@@ -8,7 +8,7 @@ if (isset($_SESSION['user_id'])) {
    $user_id = $_SESSION['user_id'];
 } else {
    $user_id = '';
-   header('location:user_login.php'); 
+   header('location:user_login'); 
 };
 
 if (isset($_POST['order'])) {
@@ -67,7 +67,7 @@ if (isset($_POST['order'])) {
 </head>
 
 <body>
-   <?php include 'components/user_header.php'; ?>
+   <?php include 'components/user_header'; ?>
    <div class="product-container">
       <div class="container">
          <div class="sidebar  has-scrollbar" data-mobile-menu>
@@ -174,7 +174,7 @@ if (isset($_POST['order'])) {
          <!-- </section> -->
       </div>
    </div>
-   <?php include 'components/footer.php'; ?>
+   <?php include 'components/footer'; ?>
    <script src="js/script.js"></script>
 </body>
 

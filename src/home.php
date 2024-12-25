@@ -406,9 +406,6 @@ include 'components/wishlist_cart.php';
                      }
                      ?>
                   </div>
-
-
-                  <!-- Pagination -->
                   <div class="pagination">
                      <?php if ($current_page > 1) { ?>
                         <a href="?page=<?= $current_page - 1; ?>" class="arrow">&#60;</a>

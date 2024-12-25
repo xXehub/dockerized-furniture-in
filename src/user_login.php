@@ -53,7 +53,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout') {
 <body>
     <?php include 'components/user_header.php'; ?>
     
-    <div class="login">
+   <div class="login">
         <div class="container">
             <div class="slider-item">
                 <div class="login-content">

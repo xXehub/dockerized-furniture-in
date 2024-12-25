@@ -1,6 +1,6 @@
 <?php
 
-include 'components/connect.php';
+include 'components/connect';
 
 session_start();
 
@@ -35,7 +35,7 @@ if (isset($_SESSION['user_id'])) {
 
 <body>
 
-   <?php include 'components/user_header.php'; ?>
+   <?php include 'components/user_header'; ?>
    <main>
       <div class="product-container">
          <div class="container">
@@ -62,7 +62,7 @@ if (isset($_SESSION['user_id'])) {
                                     <input type="hidden" name="name" value="<?= $fetch_orders['name']; ?>">
                                     <div class="menu-title-flex">
                                        <!-- <img src="./assets/images/icons/dress." alt="clothes" width="20" height="20" class="menu-title-img"> -->
-                                       <a class="menu-title" href="category.php?category=<?= $fetch_orders['name']; ?>"><?= $fetch_orders['name']; ?></a>
+                                       <a class="menu-title" href="category?category=<?= $fetch_orders['name']; ?>"><?= $fetch_orders['name']; ?></a>
                                     </div>
                                  </form>
                            <?php
@@ -150,7 +150,7 @@ if (isset($_SESSION['user_id'])) {
                                           </div>
                                           <div class="price-box">
                                              <button type="submit" value="perbarui" class="btn btn-wishlist" name="update_payment"><i class="fa-solid fa-box"></i> kembali</button>
-                                             <!-- <a href="placed_orders.php?delete=<?= $fetch_orders['id']; ?>" class="btn btn-delete" onclick="return confirm('hapus pesanan ini?');"><i class="fa-solid fa-trash"></i></a> -->
+                                             <!-- <a href="placed_orders?delete=<?= $fetch_orders['id']; ?>" class="btn btn-delete" onclick="return confirm('hapus pesanan ini?');"><i class="fa-solid fa-trash"></i></a> -->
                                           </div>
                                        </form>
                                        <!-- end method post -->
@@ -173,7 +173,7 @@ if (isset($_SESSION['user_id'])) {
          </div>
       </div>
    </main>
-   <?php include 'components/footer.php'; ?>
+   <?php include 'components/footer'; ?>
 
    <script src="js/script.js"></script>
    <script src="https://kit.fontawesome.com/8a136cd674.js" crossorigin="anonymous"></script>

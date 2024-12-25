@@ -8,15 +8,15 @@ if someone sells this source code. It means you got scammed lol
 
 
 ```txt
-  ./home.php
+  ./home
 ```
-![home.php](https://raw.githubusercontent.com/xXehub/furniture-in/main/ui_screenshot/home_page.png)
+![home](https://raw.githubusercontent.com/xXehub/furniture-in/main/ui_screenshot/home_page.png)
 
 ```txt
-  ./admin/placed_orders.php
+  ./admin/placed_orders
 ```
 
-![home.php](https://raw.githubusercontent.com/xXehub/furniture-in/main/ui_screenshot/admin_orderlist.png)
+![home](https://raw.githubusercontent.com/xXehub/furniture-in/main/ui_screenshot/admin_orderlist.png)
 
 
 | Username | Password                |

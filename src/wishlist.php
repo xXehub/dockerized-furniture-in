@@ -149,7 +149,7 @@ if (isset($_GET['delete_all'])) {
                         <div class="showcase-content">
                            <div class="product-showcase">
                               <p>total semua : <span>Rp.<?= $grand_total; ?>,00</span></p>
-                              <a href="home.php" class="btn btn-wishlist">lanjut belanja</a>
+                              <a href="index.php" class="btn btn-wishlist">lanjut belanja</a>
                               <a href="wishlist.php?delete_all" class="btn btn-delete <?= ($grand_total > 1) ? '' : 'disabled'; ?>" onclick="return confirm('hapus semua produk dari wishlist?');">hapus semua </a>
                            </div>
                         </div>
