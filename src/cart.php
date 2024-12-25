@@ -9,7 +9,7 @@ if (isset($_SESSION['user_id'])) {
 } else {
    $user_id = '';
    header('location:user_login.php');
-};
+}
 
 if (isset($_POST['delete'])) {
    $cart_id = $_POST['cart_id'];
@@ -26,10 +26,21 @@ if (isset($_GET['delete_all'])) {
 if (isset($_POST['update_qty'])) {
    $cart_id = $_POST['cart_id'];
    $qty = $_POST['qty'];
-   $qty = filter_var($qty, FILTER_SANITIZE_STRING);
-   $update_qty = $conn->prepare("UPDATE `cart` SET quantity = ? WHERE id = ?");
-   $update_qty->execute([$qty, $cart_id]);
-   $message[] = 'cart quantity updated';
+
+   // Use intval() for sanitizing quantity as integer or floatval() for float quantities
+   $qty = intval($qty);  // If you want to use integers only
+
+   // If you need to sanitize and allow decimals (for instance, if qty can be decimal):
+   // $qty = floatval($qty); 
+
+   // Validate that quantity is a positive number (optional, but recommended)
+   if ($qty > 0) {
+       $update_qty = $conn->prepare("UPDATE `cart` SET quantity = ? WHERE id = ?");
+       $update_qty->execute([$qty, $cart_id]);
+       $message[] = 'Cart quantity updated';
+   } else {
+       $message[] = 'Invalid quantity!';
+   }
 }
 
 ?>
