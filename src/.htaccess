@@ -1,11 +1,11 @@
 RewriteEngine On
 RewriteBase /
 
-# Redirect any URL with .php to the same URL without .php
-RewriteCond %{THE_REQUEST} \s/([^.]+)\.php[\s?] [NC]
+# Force URLs to remove .php extension
+RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule ^(.*)\.php$ /$1 [R=301,L]
 
-# Internally rewrite URLs without .php to the corresponding .php file
+# Remove .php extension from URL and internally rewrite
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^([^/]+)$ $1.php [L]
