@@ -15,7 +15,7 @@ pipeline {
                 wrap([$class: 'BuildUser']) {
                     script {
                         env.BUILD_USER = env.BUILD_USER ?: currentBuild.getBuildCauses()[0].userId
-                        env.GIT_COMMIT = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
+                        env.GIT_COMMIT = bat(script: '@git rev-parse HEAD', returnStdout: true).trim()
                     }
                 }
             }
@@ -24,8 +24,6 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    echo "BUILD_URL: ${env.BUILD_URL}"
-                    echo "JENKINS_URL: ${env.JENKINS_URL}"
                     checkout([
                         $class: 'GitSCM',
                         branches: [[name: '*/main']],
@@ -34,24 +32,20 @@ pipeline {
                             credentialsId: '43a9241f-7637-4318-8e48-587317cbdd33' 
                         ]]
                     ])
-                    echo 'Kode berhasil diambil dari Git'
+                    bat 'echo Kode berhasil diambil dari Git'
                 }
             }
         }
 
         stage('Build') {
             steps {
-                script {
-                    echo 'Running build...'
-                }
+                bat 'echo Running build...'
             }
         }
 
         stage('Test') {
             steps {
-                script {
-                    echo 'Running tests...'
-                }
+                bat 'echo Running tests...'
             }
         }
     }
@@ -96,6 +90,7 @@ pipeline {
                 )
             }
         }
+
         failure {
             script {
                 def startTime = new Date(currentBuild.startTimeInMillis)
