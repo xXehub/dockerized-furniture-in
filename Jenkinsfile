@@ -59,7 +59,8 @@ pipeline {
                         [name: ":stopwatch: **Durasi**", value: currentBuild.durationString, inline: true],
                         [name: ":earth_africa: **Branch**", value: env.GIT_BRANCH ?: "N/A", inline: true],
                         [name: ":hash: **Commit**", value: commitHash.substring(0, 7), inline: true],
-                        [name: ":computer: **Executor**", value: "${currentBuild.rawBuild.getCause(hudson.model.Cause$UserIdCause).userName}", inline: true],
+                        // [name: ":computer: **Executor**", value: "${currentBuild.rawBuild.getCause(hudson.model.Cause$UserIdCause).userName}", inline: true],
+                        [name: ":computer: **Executor**", value: "${currentBuild.causes[0].userName ?: 'System'}", inline: true],
                         [name: ":link: **Jenkins URL**", value: "[Klik di sini](${buildUrl})", inline: true]
                     ],
                     footer: [
@@ -98,7 +99,8 @@ pipeline {
                         [name: ":stopwatch: **Durasi**", value: currentBuild.durationString, inline: true],
                         [name: ":earth_africa: **Branch**", value: env.GIT_BRANCH ?: "N/A", inline: true],
                         [name: ":hash: **Commit**", value: commitHash.substring(0, 7), inline: true],
-                        [name: ":computer: **Executor**", value: "${currentBuild.rawBuild.getCause(hudson.model.Cause$UserIdCause).userName}", inline: true],
+                        // [name: ":computer: **Executor**", value: "${currentBuild.rawBuild.getCause(hudson.model.Cause$UserIdCause).userName}", inline: true],
+                        [name: ":computer: **Executor**", value: "${currentBuild.causes[0].userName ?: 'System'}", inline: true],
                         [name: ":link: **Jenkins URL**", value: "[Klik di sini](${buildUrl})", inline: true]
                     ],
                     footer: [
