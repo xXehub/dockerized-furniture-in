@@ -9,10 +9,6 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr: '10'))
     }
 
-    wrappers {
-        buildUserVars()
-    }
-
     stages {
         stage('Set Build User') {
             steps {
@@ -42,6 +38,7 @@ pipeline {
                 }
             }
         }
+
         stage('Build') {
             steps {
                 script {
@@ -49,6 +46,7 @@ pipeline {
                 }
             }
         }
+
         stage('Test') {
             steps {
                 script {
