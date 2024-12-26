@@ -9,6 +9,8 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
+                    echo "BUILD_URL: ${env.BUILD_URL}"
+                    echo "JENKINS_URL: ${env.JENKINS_URL}"
                     checkout([
                         $class: 'GitSCM',
                         branches: [[name: '*/main']],
@@ -45,15 +47,18 @@ pipeline {
 
                 def embed = [
                     title: "__Build Sukses__",
+                    description: "Projek **Asia Meuble** komputasi awan, kelompok 3 kelas **IS-05-03**",
                     color: 3066993,
                     fields: [
+                        [name: ":bar_chart: **Status**", value: "```🟢 Berhasil```", inline: true] 
                         [name: ":gear: **Job**", value: env.JOB_NAME, inline: true],
                         [name: ":page_facing_up: **Build**", value: env.BUILD_NUMBER, inline: true],
                         [name: ":clock1: **Waktu Mulai**", value: formattedStartTime, inline: true],
                         [name: ":stopwatch: **Durasi**", value: currentBuild.durationString, inline: true],
                         [name: ":arrow_branch: **Branch**", value: env.GIT_BRANCH ?: "N/A", inline: true],
-                        [name: ":computer: **Executor**", value: env.EXECUTOR_NUMBER, inline: true],
-                        [name: ":link: **Jenkins URL**", value: "[Klik di sini](${env.BUILD_URL})", inline: true]
+                        [name: ":computer: **Executor**", value: env.BUILD_USER_ID ?: "N/A", inline: true],
+                        [name: ":link: **Jenkins URL**", value: "[Klik di sini](${env.BUILD_URL ?: env.JENKINS_URL})", inline: true],
+        
                     ],
                     footer: [
                         text: "Jenkins CI/CD Pipeline",
@@ -78,15 +83,17 @@ pipeline {
 
                 def embed = [
                     title: ":x: Build Gagal",
+                    description: "Projek **Asia Meuble** komputasi awan, kelompok 3 kelas **IS-05-03**",
                     color: 15158332,
                     fields: [
+                        [name: ":bar_chart: *Status**", value: "```🔴 Berhasil```", inline: true]  
                         [name: ":gear: **Job**", value: env.JOB_NAME, inline: true],
                         [name: ":page_facing_up: **Build**", value: env.BUILD_NUMBER, inline: true],
                         [name: ":clock1: **Waktu Mulai**", value: formattedStartTime, inline: true],
                         [name: ":stopwatch: **Durasi**", value: currentBuild.durationString, inline: true],
                         [name: ":arrow_branch: **Branch**", value: env.GIT_BRANCH ?: "N/A", inline: true],
-                        [name: ":computer: **Executor**", value: env.EXECUTOR_NUMBER, inline: true],
-                        [name: ":link: **Jenkins URL**", value: "[Klik di sini](${env.BUILD_URL})", inline: true]
+                        [name: ":computer: **Executor**", value: env.BUILD_USER_ID ?: "N/A", inline: true],
+                        [name: ":link: **Jenkins URL**", value: "[Klik di sini](${env.BUILD_URL ?: env.JENKINS_URL})", inline: true],
                     ],
                     footer: [
                         text: "Jenkins CI/CD Pipeline",
