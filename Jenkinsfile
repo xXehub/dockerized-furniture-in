@@ -47,10 +47,10 @@ pipeline {
 
                 def embed = [
                     title: "__Build Sukses__",
-                    description: "Projek **Asia Meuble** komputasi awan, kelompok 3 kelas **IS-05-03**",  // Deskripsi proyek ditambahkan di sini
+                    description: "Projek **Asia Meuble** komputasi awan, kelompok 3 kelas **IS-05-03**",  
                     color: 3066993,
                     fields: [
-                           [name: ":bar_chart: *Status**", value: "```🟢 Sukses```", inline: true]  
+                        [name: ":bar_chart: *Status**", value: "```🟢 Sukses```", inline: true],
                         [name: ":gear: **Job**", value: env.JOB_NAME, inline: true],
                         [name: ":page_facing_up: **Build**", value: env.BUILD_NUMBER, inline: true],
                         [name: ":clock1: **Waktu Mulai**", value: formattedStartTime, inline: true],
@@ -82,10 +82,10 @@ pipeline {
 
                 def embed = [
                     title: ":x: Build Gagal",
-                    description: "Projek **Asia Meuble** komputasi awan, kelompok 3 kelas **IS-05-03**",  // Deskripsi proyek ditambahkan di sini
+                    description: "Projek **Asia Meuble** komputasi awan, kelompok 3 kelas **IS-05-03**",  
                     color: 15158332,
                     fields: [
-                           [name: ":bar_chart: *Status**", value: "```🔴 Gagal```", inline: true]  
+                        [name: ":bar_chart: *Status**", value: "```🔴 Gagal```", inline: true],
                         [name: ":gear: **Job**", value: env.JOB_NAME, inline: true],
                         [name: ":page_facing_up: **Build**", value: env.BUILD_NUMBER, inline: true],
                         [name: ":clock1: **Waktu Mulai**", value: formattedStartTime, inline: true],
