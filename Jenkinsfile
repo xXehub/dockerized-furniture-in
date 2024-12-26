@@ -45,18 +45,21 @@ pipeline {
                 def startTime = new Date(currentBuild.startTimeInMillis)
                 def formattedStartTime = startTime.format('dd-MM-yyyy HH:mm:ss')
 
+                // Menggunakan BUILD_USER_ID jika ada, jika tidak menggunakan informasi lainnya
+                def executor = env.BUILD_USER_ID ?: env.GIT_AUTHOR_NAME ?: "Unknown"
+
                 def embed = [
                     title: "__Build Sukses__",
-                    description: "Projek **Asia Meuble** komputasi awan, kelompok 3 kelas **IS-05-03**",  
+                    description: "Projek **Asia Mebel** komputasi awan, kelompok 3 kelas **IS-05-03**. Menggunakan php native yang terintegrasi dengan docker, jenkins, github, discord.",  
                     color: 3066993,
                     fields: [
-                        [name: ":bar_chart: *Status**", value: "```🟢 Sukses```", inline: true],
+                        [name: ":bar_chart: **Status**", value: "```🟢 Sukses```", inline: true],
                         [name: ":gear: **Job**", value: env.JOB_NAME, inline: true],
                         [name: ":page_facing_up: **Build**", value: env.BUILD_NUMBER, inline: true],
                         [name: ":clock1: **Waktu Mulai**", value: formattedStartTime, inline: true],
                         [name: ":stopwatch: **Durasi**", value: currentBuild.durationString, inline: true],
                         [name: ":earth_africa:  **Branch**", value: env.GIT_BRANCH ?: "N/A", inline: true],
-                        [name: ":computer: **Executor**", value: env.BUILD_USER_ID ?: "N/A", inline: true],
+                        [name: ":computer: **Executor**", value: executor, inline: true],
                         [name: ":link: **Jenkins URL**", value: "[Klik di sini](${env.BUILD_URL ?: env.JENKINS_URL})", inline: true]
                     ],
                     footer: [
@@ -80,18 +83,21 @@ pipeline {
                 def startTime = new Date(currentBuild.startTimeInMillis)
                 def formattedStartTime = startTime.format('dd-MM-yyyy HH:mm:ss')
 
+                // Menggunakan BUILD_USER_ID jika ada, jika tidak menggunakan informasi lainnya
+                def executor = env.BUILD_USER_ID ?: env.GIT_AUTHOR_NAME ?: "Unknown"
+
                 def embed = [
                     title: ":x: Build Gagal",
-                    description: "Projek **Asia Meuble** komputasi awan, kelompok 3 kelas **IS-05-03**",  
+                    description: "Projek **Asia Mebel** komputasi awan, kelompok 3 kelas **IS-05-03**. Menggunakan php native yang terintegrasi dengan docker, jenkins, github, discord.",  
                     color: 15158332,
                     fields: [
-                        [name: ":bar_chart: *Status**", value: "```🔴 Gagal```", inline: true],
+                        [name: ":bar_chart: **Status**", value: "```🔴 Gagal```", inline: true],
                         [name: ":gear: **Job**", value: env.JOB_NAME, inline: true],
                         [name: ":page_facing_up: **Build**", value: env.BUILD_NUMBER, inline: true],
                         [name: ":clock1: **Waktu Mulai**", value: formattedStartTime, inline: true],
                         [name: ":stopwatch: **Durasi**", value: currentBuild.durationString, inline: true],
                         [name: ":earth_africa:  **Branch**", value: env.GIT_BRANCH ?: "N/A", inline: true],
-                        [name: ":computer: **Executor**", value: env.BUILD_USER_ID ?: "N/A", inline: true],
+                        [name: ":computer: **Executor**", value: executor, inline: true],
                         [name: ":link: **Jenkins URL**", value: "[Klik di sini](${env.BUILD_URL ?: env.JENKINS_URL})", inline: true]
                     ],
                     footer: [
