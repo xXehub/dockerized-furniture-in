@@ -44,41 +44,11 @@ pipeline {
             }
         }
 
-        stage('Send Discord Webhook') {
-            steps {
-                script {
-                    def message = [
-                        embeds: [
-                            [
-                                title: "Build Started",
-                                description: "Build untuk proyek **Asia Meuble** sedang dimulai.",
-                                color: 3066993,
-                                fields: [
-                                    [name: ":gear: **Job**", value: env.JOB_NAME, inline: true],
-                                    [name: ":page_facing_up: **Build**", value: env.BUILD_NUMBER, inline: true]
-                                ],
-                                footer: [
-                                    text: "Jenkins CI/CD Pipeline",
-                                    icon_url: "https://www.jenkins.io/images/logos/jenkins/256.png"
-                                ]
-                            ]
-                        ]
-                    ]
-                    httpRequest(
-                        url: DISCORD_WEBHOOK_URL,
-                        httpMode: 'POST',
-                        contentType: 'APPLICATION_JSON',
-                        requestBody: groovy.json.JsonOutput.toJson(message)
-                    )
-                }
-            }
-        }
-
         stage('Test') {
             steps {
                 script {
                     def userResponse = input(
-                        message: 'Apakah Anda ingin menjalankan tes?',
+                        message: 'Lanjud test nya kh?',
                         parameters: [
                             [$class: 'ChoiceParameterDefinition', 
                              choices: ['Yes', 'No'], 
@@ -96,8 +66,9 @@ pipeline {
         }
     }
 
-    post {
-        success {
+   post {
+    success {
+ stage('Mengirim Notifikasi Berhasil ke Discord') {
             script {
                 def startTime = new Date(currentBuild.startTimeInMillis)
                 def formattedStartTime = startTime.format('dd-MM-yyyy HH:mm:ss')
@@ -136,8 +107,10 @@ pipeline {
                 )
             }
         }
+    }
 
-        failure {
+    failure {
+        stage('Mengirim Notifikasi gagal ke Discord') {
             script {
                 def startTime = new Date(currentBuild.startTimeInMillis)
                 def formattedStartTime = startTime.format('dd-MM-yyyy HH:mm:ss')
@@ -177,4 +150,6 @@ pipeline {
             }
         }
     }
+}
+
 }
