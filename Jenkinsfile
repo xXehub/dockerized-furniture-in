@@ -9,15 +9,12 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr: '10'))
     }
 
-    wrappers {
-        buildUserVars()
-    }
-
     stages {
         stage('Set Build User') {
             steps {
-                wrap([$class: 'BuildUser']) {
-                    script {
+                script {
+                    // Use BuildUser in a script block
+                    wrap([$class: 'BuildUser']) {
                         env.BUILD_USER = env.BUILD_USER ?: currentBuild.getBuildCauses()[0].userId
                     }
                 }
@@ -34,7 +31,7 @@ pipeline {
                         branches: [[name: '*/main']],
                         userRemoteConfigs: [[
                             url: 'https://github.com/xXehub/dockerized-furniture-in.git', 
-                            credentialsId: '43a9241f-7637-4318-8e48-587317cbdd33' 
+                            credentialsId: '43a9241f-7637-4318-8e48-587317cbdd33'
                         ]]
                     ])
                     echo 'Kode berhasil diambil dari Git'
