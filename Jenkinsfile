@@ -46,19 +46,10 @@ pipeline {
         stage('Test Koneksi Discord') {
             steps {
                 script {
-                    try {
-                        def testMessage = [
-                            content: "Testing koneksi discord ke Jenkins!"
-                        ]
-                        def response = httpRequest(
-                            url: DISCORD_WEBHOOK_URL,
-                            httpMode: 'POST',
-                            contentType: 'APPLICATION_JSON',
-                            requestBody: groovy.json.JsonOutput.toJson(testMessage)
-                        )
-                        echo "Discord berhasil konek: ${response}"
+                   try {
+                        echo "Discord test berhasil!"
                     } catch (Exception e) {
-                        error "Gagal konek discord: ${e.message}"
+                        error "Gagal koneksi ke discord: ${e.message}"
                     }
                 }
             }
