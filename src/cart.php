@@ -40,9 +40,30 @@ if (isset($_POST['update_qty'])) {
        $message[] = 'Cart quantity updated';
    } else {
        $message[] = 'Invalid quantity!';
+   
+
+      try {
+          // Get Snap Payment Page URL
+          $snapToken = \Midtrans\Snap::getSnapToken($params);
+          
+          // Update order dengan snap token
+          $update_token = $conn->prepare("UPDATE `orders` SET snap_token = ? WHERE id = ?");
+          $update_token->execute([$snapToken, $order_id]);
+
+          // Hapus cart setelah order
+          $delete_cart = $conn->prepare("DELETE FROM `cart` WHERE user_id = ?");
+          $delete_cart->execute([$user_id]);
+
+          // Redirect ke halaman pembayaran
+          header("Location: payment_page.php?order_id=".$order_id);
+          exit();
+      }
+      catch (\Exception $e) {
+          echo $e->getMessage();
+          exit;
+      }
    }
 }
-
 ?>
 
 <!DOCTYPE html>
