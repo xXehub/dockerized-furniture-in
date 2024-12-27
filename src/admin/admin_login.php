@@ -69,7 +69,7 @@ if (isset($_POST['submit'])) {
             <!-- <img src="./assets/images/Quirky-house-Banner.jpg" alt="women's latest fashion sale" class="banner-img"> -->
             <div class="login-content">
                
-               <h2 class="banner-title">Jawir Admins.</h2>
+               <h2 class="banner-title">MEBEL ADMINS.</h2>
 
                <form action="" method="post">
 

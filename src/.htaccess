@@ -1,11 +1,12 @@
 RewriteEngine On
 RewriteBase /
 
-# Force URLs to remove .php extension
 RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule ^(.*)\.php$ /$1 [R=301,L]
 
-# Remove .php extension from URL and internally rewrite
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^([^/]+)$ $1.php [L]
+
+RewriteCond %{REQUEST_URI} ^/$
+RewriteRule ^$ /home [R=301,L]
