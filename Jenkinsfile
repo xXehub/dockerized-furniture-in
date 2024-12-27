@@ -88,7 +88,7 @@ pipeline {
 
     post {
         success {
-            stage('Mengirim Notifikasi Berhasil ke Discord') {
+
                 script {
                     def startTime = new Date(currentBuild.startTimeInMillis)
                     def formattedStartTime = startTime.format('dd-MM-yyyy HH:mm:ss')
@@ -126,11 +126,11 @@ pipeline {
                         requestBody: groovy.json.JsonOutput.toJson(message)
                     )
                 }
-            }
+            
         }
 
         failure {
-            stage('Mengirim Notifikasi Gagal ke Discord') {
+
                 script {
                     def startTime = new Date(currentBuild.startTimeInMillis)
                     def formattedStartTime = startTime.format('dd-MM-yyyy HH:mm:ss')
@@ -168,7 +168,7 @@ pipeline {
                         requestBody: groovy.json.JsonOutput.toJson(message)
                     )
                 }
-            }
+            
         }
     }
 }
