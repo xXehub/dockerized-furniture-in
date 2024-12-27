@@ -4,7 +4,6 @@ pipeline {
     environment {
         DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/1319517307277410345/KmUhZyF82LFk6sjZZygvFHSiMfFEv_sowpHv0NtBfKvM8I5hKwI_tx_v9kpbHwPD-UJF'
         DOCKER_IMAGE_NAME = 'mydocker/asia-meuble-docker' 
-        DOCKER_REGISTRY = 'dockerhub_username/asia-meuble' // Replace with your Docker registry if pushing to DockerHub
     }
 
     options {
@@ -39,7 +38,7 @@ pipeline {
             }
         }
 
-         stage('Build Docker Image') {
+        stage('Build Docker Image') {
             steps {
                 script {
                     echo "Building Docker image: ${env.DOCKER_IMAGE_NAME}"
@@ -51,7 +50,7 @@ pipeline {
         stage('Test Koneksi Discord') {
             steps {
                 script {
-                   try {
+                    try {
                         echo "Discord test berhasil!"
                     } catch (Exception e) {
                         error "Gagal koneksi ke discord: ${e.message}"
@@ -81,9 +80,9 @@ pipeline {
             }
         }
 
-         stage('Push Docker Image to Registry') {
+        stage('Push Docker Image to Registry') {
             steps {
-                echo 'Pushing Docker image to registry'
+                echo 'Docker image will not be pushed to Docker Hub since we are using Docker Desktop.'
             }
         }
     }
