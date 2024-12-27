@@ -29,8 +29,8 @@ pipeline {
                         $class: 'GitSCM',
                         branches: [[name: '*/main']],
                         userRemoteConfigs: [[
-                            url: 'https://github.com/xXehub/dockerized-furniture-in.git', 
-                            credentialsId: '43a9241f-7637-4318-8e48-587317cbdd33' 
+                            url: 'https://github.com/xXehub/dockerized-furniture-in.git',
+                            credentialsId: '43a9241f-7637-4318-8e48-587317cbdd33'
                         ]]
                     ])
                     bat 'echo Kode berhasil diambil dari Git'
@@ -44,9 +44,54 @@ pipeline {
             }
         }
 
+        stage('Send Discord Webhook') {
+            steps {
+                script {
+                    def message = [
+                        embeds: [
+                            [
+                                title: "Build Started",
+                                description: "Build untuk proyek **Asia Meuble** sedang dimulai.",
+                                color: 3066993,
+                                fields: [
+                                    [name: ":gear: **Job**", value: env.JOB_NAME, inline: true],
+                                    [name: ":page_facing_up: **Build**", value: env.BUILD_NUMBER, inline: true]
+                                ],
+                                footer: [
+                                    text: "Jenkins CI/CD Pipeline",
+                                    icon_url: "https://www.jenkins.io/images/logos/jenkins/256.png"
+                                ]
+                            ]
+                        ]
+                    ]
+                    httpRequest(
+                        url: DISCORD_WEBHOOK_URL,
+                        httpMode: 'POST',
+                        contentType: 'APPLICATION_JSON',
+                        requestBody: groovy.json.JsonOutput.toJson(message)
+                    )
+                }
+            }
+        }
+
         stage('Test') {
             steps {
-                bat 'echo Running tests...'
+                script {
+                    def userResponse = input(
+                        message: 'Apakah Anda ingin menjalankan tes?',
+                        parameters: [
+                            [$class: 'ChoiceParameterDefinition', 
+                             choices: ['Yes', 'No'], 
+                             description: 'Pilih Yes untuk melanjutkan tes.', 
+                             name: 'TestResponse']
+                        ]
+                    )
+                    if (userResponse == 'Yes') {
+                        bat 'echo Running tests...'
+                    } else {
+                        echo "Test skipped"
+                    }
+                }
             }
         }
     }
