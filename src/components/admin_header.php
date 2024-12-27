@@ -18,7 +18,7 @@ if (isset($message)) {
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Jawir.In - eCommerce Website</title>
+   <title>Toko Asia Mebel - eCommerce Website</title>
 
    <!--- favicon-->
    <link rel="shortcut icon" href="./assets/images/logo/favicon.ico" type="image/x-icon">
@@ -84,8 +84,8 @@ if (isset($message)) {
          <div class="container">
 
             <a href="#" class="header-logo">
-               <img src="../assets/images/logo/telu.png" alt="Jawir.In's logo" width="120" height="50">
-               <!-- <img src="./assets/images/logo/telu.png" alt="Jawir.In's logo" width="120" height="36"> -->
+               <img src="../assets/images/logo/telu.png" alt="Toko Asia Mebel's logo" width="120" height="50">
+               <!-- <img src="./assets/images/logo/telu.png" alt="Toko Asia Mebel's logo" width="120" height="36"> -->
             </a>
 
             <div class="header-search-container">

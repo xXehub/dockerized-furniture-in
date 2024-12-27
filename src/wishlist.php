@@ -34,7 +34,7 @@ if (isset($_GET['delete_all'])) {
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Jawir.In - eCommerce Website</title>
+   <title>Toko Asia Mebel - eCommerce Website</title>
 
    <!--- favicon-->
    <link rel="shortcut icon" href="./assets/images/logo/favicon.ico" type="image/x-icon">
@@ -81,7 +81,7 @@ if (isset($_GET['delete_all'])) {
                                  <!-- <img src="uploaded_img/<?= $fetch_wishlist['image']; ?>" alt="wishlist" width="300" class="product-img default"> -->
                                  <img src="uploaded_img/<?= $fetch_wishlist['image']; ?>" alt="Gambare lur" width="300" class="product-img ">
                                  <!-- <img src="uploaded_img/<?= $fetch_wishlist['image']; ?>" alt="Gambare2 lur" width="300" class="product-img hover"> -->
-                                 <p class="showcase-badge">WISHLIST</p>
+                                 <!-- <p class="showcase-badge">WISHLIST</p> -->
                                  <div class="showcase-content">
                                     <div class="showcase-title"><?= $fetch_wishlist['name']; ?></div>
                                     <div class="price-box">

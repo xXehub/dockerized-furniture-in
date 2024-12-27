@@ -49,6 +49,10 @@ if (isset($_POST['submit'])) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- SweetAlert2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body>
@@ -59,38 +63,12 @@ if (isset($_POST['submit'])) {
                 <div class="login-content">
                     <section class="form-container">
                         <form action="" method="post">
-                        <input type="text" name="name" required placeholder="Masukkan username" maxlength="20" class="kolom-field">
-   <input type="email" name="email" required placeholder="Masukkan email" maxlength="50" class="kolom-field" oninput="this.value = this.value.replace(/\s/g, '')">
-   <input type="password" name="pass" required placeholder="Masukkan password" maxlength="20" class="kolom-field" oninput="this.value = this.value.replace(/\s/g, '')">
-   <input type="password" name="cpass" required placeholder="Konfirmasi password" maxlength="20" class="kolom-field" oninput="this.value = this.value.replace(/\s/g, '')">
-   <input type="text" name="address" required placeholder="Masukkan alamat" maxlength="255" class="kolom-field">
-   <input type="text" name="phone" required placeholder="Masukkan nomor telepon" maxlength="15" class="kolom-field">
-
-                            <!-- Notifikasi -->
-                            <p style="color:red;">
-                                <?php
-                                if (isset($_SESSION['error'])) {
-                                    echo $_SESSION['error'];
-                                    unset($_SESSION['error']);
-                                }
-                                ?>
-                            </p>
-                            <p style="color:red;">
-                                <?php
-                                if (isset($_SESSION['duplikat'])) {
-                                    echo $_SESSION['duplikat'];
-                                    unset($_SESSION['duplikat']);
-                                }
-                                ?>
-                            </p>
-                            <p style="color:green;">
-                                <?php
-                                if (isset($_SESSION['register_berhasil'])) {
-                                    echo $_SESSION['register_berhasil'];
-                                    unset($_SESSION['register_berhasil']);
-                                }
-                                ?>
-                            </p>
+                            <input type="text" name="name" required placeholder="Masukkan username" maxlength="20" class="kolom-field">
+                            <input type="email" name="email" required placeholder="Masukkan email" maxlength="50" class="kolom-field" oninput="this.value = this.value.replace(/\s/g, '')">
+                            <input type="password" name="pass" required placeholder="Masukkan password" maxlength="20" class="kolom-field" oninput="this.value = this.value.replace(/\s/g, '')">
+                            <input type="password" name="cpass" required placeholder="Konfirmasi password" maxlength="20" class="kolom-field" oninput="this.value = this.value.replace(/\s/g, '')">
+                            <input type="text" name="address" required placeholder="Masukkan alamat" maxlength="255" class="kolom-field">
+                            <input type="text" name="phone" required placeholder="Masukkan nomor telepon" maxlength="15" class="kolom-field">
 
                             <input type="submit" value="Daftar Sekarang" class="btn btn-login" name="submit">
                             <p>Sudah punya akun?</p>
@@ -101,7 +79,48 @@ if (isset($_POST['submit'])) {
             </div>
         </div>
     </div>
+
     <?php include 'components/footer.php'; ?>
+
+    <!-- SweetAlert2 Script to show success and error messages -->
+    <script>
+        <?php if (isset($_SESSION['register_berhasil'])): ?>
+            Swal.fire({
+                title: 'Berhasil!',
+                text: '<?php echo $_SESSION['register_berhasil']; ?>',
+                icon: 'success',
+                confirmButtonText: 'Tutup'
+            }).then(() => {
+                // Clear session message after SweetAlert close
+                <?php unset($_SESSION['register_berhasil']); ?>
+            });
+        <?php endif; ?>
+
+        <?php if (isset($_SESSION['error'])): ?>
+            Swal.fire({
+                title: 'Error!',
+                text: '<?php echo $_SESSION['error']; ?>',
+                icon: 'error',
+                confirmButtonText: 'Tutup'
+            }).then(() => {
+                // Clear session message after SweetAlert close
+                <?php unset($_SESSION['error']); ?>
+            });
+        <?php endif; ?>
+
+        <?php if (isset($_SESSION['duplikat'])): ?>
+            Swal.fire({
+                title: 'Error!',
+                text: '<?php echo $_SESSION['duplikat']; ?>',
+                icon: 'error',
+                confirmButtonText: 'Tutup'
+            }).then(() => {
+                // Clear session message after SweetAlert close
+                <?php unset($_SESSION['duplikat']); ?>
+            });
+        <?php endif; ?>
+    </script>
+
     <script src="js/script.js"></script>
 </body>
 

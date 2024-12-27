@@ -90,7 +90,7 @@ if (isset($_GET['delete'])) {
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Jawir.In - eCommerce Website</title>
+   <title>Toko Asia Mebel - eCommerce Website</title>
 
    <!--- favicon-->
    <link rel="shortcut icon" href="./assets/images/logo/favicon.ico" type="image/x-icon">
@@ -304,7 +304,7 @@ if (isset($_GET['delete'])) {
                      <!-- query search -->
 
                      <?php
-                     $select_products = $conn->prepare("SELECT * FROM `products` LIMIT 8");
+                     $select_products = $conn->prepare("SELECT * FROM `products` LIMIT 12");
                      $select_products->execute();
                      if ($select_products->rowCount() > 0) {
                         while ($fetch_product = $select_products->fetch(PDO::FETCH_ASSOC)) {
@@ -322,7 +322,7 @@ if (isset($_GET['delete'])) {
 
                                     <img src="../uploaded_img/<?= $fetch_product['image_01']; ?>" alt="Gambare lur" width="300" class="product-img default">
                                     <img src="../uploaded_img/<?= $fetch_product['image_01']; ?>" alt="Gambare2 lur" width="300" class="product-img hover">
-                                    <p class="showcase-badge">TESTING</p>
+                                    <!-- <p class="showcase-badge">TESTING</p> -->
 
                                     <div href="quick_view.php?pid=<?= $fetch_product['id']; ?>" class="showcase-actions">
 

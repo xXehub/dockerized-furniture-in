@@ -21,7 +21,7 @@ include 'components/wishlist_cart.php';
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Jawir.In - eCommerce Website</title>
+   <title>Toko Asia Mebel - eCommerce Website</title>
 
    <!--- favicon-->
    <link rel="shortcut icon" href="./assets/images/logo/favicon.ico" type="image/x-icon">
@@ -47,7 +47,7 @@ include 'components/wishlist_cart.php';
                   <img src="./assets/images/Quirky-house-Banner.jpg" alt="women's latest fashion sale" class="banner-img">
                   <div class="banner-content">
                      <p class="banner-subtitle">Trending item</p>
-                     <h2 class="banner-title">Jawir Living Room</h2>
+                     <h2 class="banner-title">Toko Asia Mebel</h2>
                      <p class="banner-text">
                         starting at IDR <b>200.000</b>.00
                      </p>

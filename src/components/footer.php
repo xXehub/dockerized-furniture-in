@@ -275,7 +275,7 @@
          <img src="./assets/images/payment.png" alt="payment method" class="payment-img">
 
          <p class="copyright">
-            Copyright &copy; <a href="#">Jawir.In</a> all rights reserved.
+            Copyright &copy; <a href="#">Toko Asia Mebel</a> all rights reserved.
          </p>
 
       </div>

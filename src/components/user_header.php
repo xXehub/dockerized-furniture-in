@@ -20,7 +20,7 @@
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Jawir.In - eCommerce Website</title>
+   <title>Toko Asia Mebel - eCommerce Website</title>
 
    <!--- favicon-->
    <link rel="shortcut icon" href="./assets/images/logo/favicon.ico" type="image/x-icon">
@@ -52,7 +52,7 @@
             <div class="newsletter-header">
                <h3 class="newsletter-title">Subscribe Newsletter.</h3>
                <p class="newsletter-desc">
-                  Subscribe the <b>Jawir.In</b> to get latest products and discount update.
+                  Subscribe the <b>Toko Asia Mebel</b> to get latest products and discount update.
                </p>
             </div>
             <input type="email" name="email" class="email-field" placeholder="Email Address" required>
@@ -163,8 +163,8 @@
          <div class="container">
 
             <a href="#" class="header-logo">
-               <img src="./assets/images/logo/sofa.jpg" alt="Jawir.In's logo" width="120" height="50">
-               <!-- <img src="./assets/images/logo/telu.png" alt="Jawir.In's logo" width="120" height="36"> -->
+               <img src="./assets/images/logo/sofa.jpg" alt="Toko Asia Mebel's logo" width="120" height="50">
+               <!-- <img src="./assets/images/logo/telu.png" alt="Toko Asia Mebel's logo" width="120" height="36"> -->
             </a>
 
             <div class="header-search-container">
