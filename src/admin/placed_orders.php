@@ -26,14 +26,32 @@ if (isset($_GET['delete'])) {
 
 // fungsi gawe pagination
 $limit = 8;
-$page = isset($_GET['page']) ? (int) $_GET['page'] : 1; 
-$offset = ($page - 1) * $limit; 
+$page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+$offset = ($page - 1) * $limit;
 
 $total_orders_query = $conn->prepare("SELECT COUNT(*) FROM `orders`");
 $total_orders_query->execute();
 $total_orders = $total_orders_query->fetchColumn();
-$total_pages = ceil($total_orders / $limit); 
+$total_pages = ceil($total_orders / $limit);
 
+$limit = 5;
+
+// Tentukan halaman saat ini
+$page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+$page = max($page, 1); // Pastikan halaman tidak kurang dari 1
+
+// Hitung offset untuk query
+$offset = ($page - 1) * $limit;
+
+// Query untuk mendapatkan total jumlah pesanan
+$count_query = $conn->prepare("SELECT COUNT(*) FROM `orders` WHERE user_id = ?");
+$count_query->execute([$user_id]);
+$total_orders = $count_query->fetchColumn();
+$total_pages = ceil($total_orders / $limit);
+
+// Query untuk mendapatkan data pesanan dengan pagination
+$select_orders = $conn->prepare("SELECT * FROM `orders` WHERE user_id = ? ORDER BY placed_on DESC LIMIT ? OFFSET ?");
+$select_orders->execute([$user_id, $limit, $offset]);
 ?>
 
 <!DOCTYPE html>
@@ -271,6 +289,7 @@ $total_pages = ceil($total_orders / $limit);
             </div>
 
          </div>
+         
 
       </div>
 

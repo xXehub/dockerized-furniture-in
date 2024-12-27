@@ -209,7 +209,7 @@ include 'components/wishlist_cart.php';
 
                      <img src="uploaded_img/<?= $fetch_product['image_01']; ?>" alt="Mens Winter Leathers Jackets" width="300" class="product-img default">
                      <img src="uploaded_img/<?= $fetch_product['image_01']; ?>" alt="Mens Winter Leathers Jackets" width="300" class="product-img hover">
-                     <p class="showcase-badge">TESTING</p>
+                     <!-- <p class="showcase-badge">TESTING</p> -->
                      <div href="quick_view.php?pid=<?= $fetch_product['id']; ?>" class="showcase-actions">
 
                         <p style="color:red;">

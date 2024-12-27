@@ -90,7 +90,7 @@ if (isset($_SESSION['user_id'])) {
             <div class="product-box">
                <!-- produk pesanan box -->
                <div class="product-main">
-                  <h2 class="title"><i class="fa-solid fa-cart-shopping"></i> LIST PESANAN</h2>
+                  <h2 class="title"><i class="fa-solid fa-cart-shopping"></i> LIST PESASNAN</h2>
                   <div class="product-grid">
                      <?php
                      if ($user_id == '') {
@@ -186,23 +186,13 @@ if (isset($_SESSION['user_id'])) {
 
                   <div class="box-container">
 
-                    
-
+            
                   </div> -->
 
             <!-- </section> -->
 
          </div>
       </div>
-
-
-
-
-
-
-
-
-
 
    </main>
    <?php include 'components/footer.php'; ?>
