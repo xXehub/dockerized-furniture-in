@@ -12,10 +12,11 @@ pipeline {
     stages {
         stage('Set Build User') {
             steps {
-                script {
-                    // Use BuildUser in a script block
-                    wrap([$class: 'BuildUser']) {
+                wrap([$class: 'BuildUser']) {
+                    script {
                         env.BUILD_USER = env.BUILD_USER ?: currentBuild.getBuildCauses()[0].userId
+    
+                        env.GIT_COMMIT = bat(script: '@git rev-parse HEAD', returnStdout: true).trim()
                     }
                 }
             }
@@ -24,32 +25,28 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    echo "BUILD_URL: ${env.BUILD_URL}"
-                    echo "JENKINS_URL: ${env.JENKINS_URL}"
                     checkout([
                         $class: 'GitSCM',
                         branches: [[name: '*/main']],
                         userRemoteConfigs: [[
                             url: 'https://github.com/xXehub/dockerized-furniture-in.git', 
-                            credentialsId: '43a9241f-7637-4318-8e48-587317cbdd33'
+                            credentialsId: '43a9241f-7637-4318-8e48-587317cbdd33' 
                         ]]
                     ])
-                    echo 'Kode berhasil diambil dari Git'
+                    bat 'echo Kode berhasil diambil dari Git'
                 }
             }
         }
+
         stage('Build') {
             steps {
-                script {
-                    echo 'Running build...'
-                }
+                bat 'echo Running build...'
             }
         }
+
         stage('Test') {
             steps {
-                script {
-                    echo 'Running tests...'
-                }
+                bat 'echo Running tests...'
             }
         }
     }
@@ -61,10 +58,11 @@ pipeline {
                 def formattedStartTime = startTime.format('dd-MM-yyyy HH:mm:ss')
                 def executor = env.BUILD_USER ?: currentBuild.getBuildCauses()[0].userId ?: "System"
                 def buildUrl = env.BUILD_URL ?: env.JENKINS_URL ?: "https://fairly-notable-skink.ngrok-free.app"
+                def commitHash = env.GIT_COMMIT ?: "N/A"
 
                 def embed = [
                     title: "__Build Sukses__",
-                    description: "Projek **Asia Meuble** komputasi awan, kelompok 3 kelas **IS-05-03**. Menggunakan php native yang terintegrasi dengan docker, jenkins, github, discord.",  
+                    description: "Projek **Asia Meuble** komputasi awan, kelompok 3 kelas **IS-05-03**. Menggunakan php native yang terintegrasi dengan docker, jenkins, github, discord.\n\n",  
                     color: 3066993,
                     fields: [
                         [name: ":bar_chart: **Status**", value: "```🟢 Sukses```", inline: true],
@@ -72,7 +70,8 @@ pipeline {
                         [name: ":page_facing_up: **Build**", value: env.BUILD_NUMBER, inline: true],
                         [name: ":clock1: **Waktu Mulai**", value: formattedStartTime, inline: true],
                         [name: ":stopwatch: **Durasi**", value: currentBuild.durationString, inline: true],
-                        [name: ":earth_africa:  **Branch**", value: env.GIT_BRANCH ?: "N/A", inline: true],
+                        [name: ":earth_africa: **Branch**", value: env.GIT_BRANCH ?: "N/A", inline: true],
+                        [name: ":hash: **Commit**", value: commitHash.substring(0, 7), inline: true],
                         [name: ":computer: **Executor**", value: executor, inline: true],
                         [name: ":link: **Jenkins URL**", value: "[Klik di sini](${buildUrl})", inline: true]
                     ],
@@ -92,16 +91,18 @@ pipeline {
                 )
             }
         }
+
         failure {
             script {
                 def startTime = new Date(currentBuild.startTimeInMillis)
                 def formattedStartTime = startTime.format('dd-MM-yyyy HH:mm:ss')
                 def executor = env.BUILD_USER ?: currentBuild.getBuildCauses()[0].userId ?: "System"
                 def buildUrl = env.BUILD_URL ?: env.JENKINS_URL ?: "https://fairly-notable-skink.ngrok-free.app"
+                def commitHash = env.GIT_COMMIT ?: "N/A"
 
                 def embed = [
                     title: ":x: Build Gagal",
-                    description: "Projek **Asia Meuble** komputasi awan, kelompok 3 kelas **IS-05-03**. Menggunakan php native yang terintegrasi dengan docker, jenkins, github, discord.",  
+                    description: "Projek **Asia Meuble** komputasi awan, kelompok 3 kelas **IS-05-03**. Menggunakan php native yang terintegrasi dengan docker, jenkins, github, discord.\n\n",  
                     color: 15158332,
                     fields: [
                         [name: ":bar_chart: **Status**", value: "```🔴 Gagal```", inline: true],
@@ -109,7 +110,8 @@ pipeline {
                         [name: ":page_facing_up: **Build**", value: env.BUILD_NUMBER, inline: true],
                         [name: ":clock1: **Waktu Mulai**", value: formattedStartTime, inline: true],
                         [name: ":stopwatch: **Durasi**", value: currentBuild.durationString, inline: true],
-                        [name: ":earth_africa:  **Branch**", value: env.GIT_BRANCH ?: "N/A", inline: true],
+                        [name: ":earth_africa: **Branch**", value: env.GIT_BRANCH ?: "N/A", inline: true],
+                        [name: ":hash: **Commit**", value: commitHash.substring(0, 7), inline: true],
                         [name: ":computer: **Executor**", value: executor, inline: true],
                         [name: ":link: **Jenkins URL**", value: "[Klik di sini](${buildUrl})", inline: true]
                     ],
