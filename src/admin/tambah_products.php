@@ -185,6 +185,9 @@ if (isset($_GET['delete'])) {
                            <select name="kategori" class="kolom-field" required>
                               <option value="Tempat Tidur">Tempat Tidur</option>
                               <option value="Sofa Set">Sofa Set</option>
+                              <option value="Meja">Meja</option>
+                              <option value="Kursi">Kursi</option>
+                              <option value="Lemari">Lemari</option>
                            </select>
                         </div>
                      </div>

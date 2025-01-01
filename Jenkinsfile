@@ -82,7 +82,7 @@ pipeline {
 
         stage('Push Docker Image to Registry') {
             steps {
-                echo 'Docker image will not be pushed to Docker Hub since we are using Docker Desktop.'
+                echo 'Pake docker local.'
             }
         }
     }
